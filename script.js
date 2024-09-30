@@ -16,44 +16,54 @@ function divide(num1, num2){
 
 let firstNum = "";
 let secondNum = "";
+let operatorChosen = "";
 let operatorSelected = false;
 
 let operator =  document.getElementsByClassName("opBtn");
 
+let displayValue = document.getElementsByTagName("p")[0];
+
 for (let j=0; j<operator.length; j++){
     operator[j].addEventListener("click", function(){
-        if (operator[j].textContent !== "="){
-            operatorChosen = operator[j].textContent;
-            operatorSelected = true;
+        let operatorText = operator[j].textContent;
+
+        if (operatorText === "CLR"){
+            firstNum = "";
+            secondNum = "";
+            operatorSelected = false;
+            operatorChosen = "";
+            displayValue.textContent = "";
+        }
+        else if (operatorText === "=") {
+            operate();
         }
         else{
-            operate()
-         
+            operatorChosen = operatorText;
+            operatorSelected = true;
         }
-
     })
 }
 
 function operate(){
     if (operatorChosen === "+"){
        result = add(parseInt(firstNum), parseInt(secondNum));
-       displayValue.textContent = result; 
     }
     else if (operatorChosen === "-"){
-        result = subtract(parseInt(firstNum), parseInt(secondNum));
-        displayValue.textContent = result; 
-    }
+        result = subtract(parseInt(firstNum), parseInt(secondNum));    }
     else if (operatorChosen === "*"){
         result = multiply(parseInt(firstNum), parseInt(secondNum));
-        displayValue.textContent = result; 
     }
-    else if (operoperatorChosenator === "/"){
+    else if (operatorChosen === "/"){
         result = divide(parseInt(firstNum), parseInt(secondNum));
-        displayValue.textContent = result; 
     }
+    displayValue.textContent = result; 
+
+    firstNum = String(result);
+    secondNum = "";
+    operatorSelected = false;
 }
 
-let displayValue = document.getElementsByTagName("p")[0];
+
 
 const numberButton = document.getElementsByClassName("number");
 for (let i = 0; i<numberButton.length; i++){
