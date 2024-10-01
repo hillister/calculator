@@ -32,12 +32,16 @@ for (let j=0; j<operator.length; j++){
             secondNum = "";
             operatorSelected = false;
             operatorChosen = "";
+            result = null;
             displayValue.textContent = "";
         }
         else if (operatorText === "=") {
             operate();
+            operatorSelected = false;
         }
-        else{
+        else{ if(firstNum && secondNum){
+            operate();
+        }
             operatorChosen = operatorText;
             operatorSelected = true;
         }
